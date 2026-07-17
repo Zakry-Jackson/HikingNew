@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;600&display=swap');
+
+/* Used rem so I didn't have to keep track of pixels */
+
+/* pallete */
+:root {
+    --text: #000000;
+    --title-bar: #143109; 
+    --nav-bg: #6b4b3e;
+    --bg: #aaae7f;
+    --panel: #d0d6b3;
+    --main-ink: #9eb7e5;
+}
+
+.post-body {
+    white-space: pre-wrap;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+}
+
+.site-header {
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    text-align: center;
+    padding: 1.5rem 0;
+
+    background-image: url("/static/images/leaves.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.site-header h1 {
+    margin: auto;
+    font-size: 4rem;
+    color: var(--main-ink);
+    position: relative;
+    z-index: 1;
+}
+
+/* main layout */
+.layout {
+    display: flex;
+    /* height minus header */
+    min-height: calc(100vh - 64px);
+}
+
+/* nav bar */
+.sidebar {
+    width: 220px;
+    padding: 1rem 0;
+    background: url("/static/images/wood.jpeg");
+    background-size: contain;
+    background-repeat: repeat-y;
+    background-position: center;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar nav li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--main-ink);
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sidebar nav a:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+/* main content i.e. everything not the header and nav */
+.content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* card that most text will be in */
+.card {
+    background: var(--panel);
+    border-radius: 0.75rem;
+    padding: 1rem 1.5rem;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    text-align: left;
+}
+
+.card h1 {
+    text-align: center;
+}
+
+/* keeps the heading inside the cards centered */
+.card h1,
+.card h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    background: var(--nav-bg);
+    color: var(--main-ink);
+    padding: 0.35rem 0;
+    border-radius: 0.4rem;
+}
+.card h3 {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+/* recent posts on main page */
+.post-list {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 0.5rem 0 0;
+}
+
+/* each post preview */
+.post-list li {
+    margin-bottom: 0.5rem;
+}
+
+/* forms on create/edit pages */
+.post-form {
+    margin-top: 0.5rem;
+}
+
+.field {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.field label {
+    font-weight: 600;
+}
+
+.field input[type="text"],
+.field textarea {
+    font: inherit;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background: #f7f7f7;
+}
+
+.field textarea.comment-textarea {
+    min-height: 100px;
+}
+
+/* for resizing  */
+.field textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.form-actions {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.form-actions button {
+    font: inherit;
+    padding: 0.5rem 1.1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    background: var(--nav-bg);
+    color: #fff;
+    font-weight: 600;
+}
+
+.form-actions button:hover {
+    filter: brightness(1);
+}
+
+.button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--nav-bg);
+    text-decoration: none;
+    font: inherit;
+    font-weight: 500;
+    color: var(--nav-bg);
+    background: transparent;
+}
+
+.button-secondary:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.btn {
+    font: inherit;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    transition: 
+        transform 0.05s ease-out,
+        box-shadow 0.05s ease-out,
+        filter 0.05s ease-out;
+}
+
+.btn-primary {
+    background: var(--nav-bg);
+    color: var(--main-ink);
+}
+
+.btn-delete {
+    background: #a13b2a;
+    border-color: #7d2e21;
+    color: var(--main-ink);
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    filter: brightness(0.9);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+}
+
+.post-actions {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.site-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    z-index: 5;
+    /* for darkening of footer image*/
+    overflow: hidden;
+}
+
+.site-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("/static/images/grass_footer.png") repeat-x bottom center;
+    background-size: auto 100%;
+    filter: brightness(0.65);
+    pointer-events: none;
+}
+
+/* comment stuff */
+.comment-list {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding-left: 0;
+}
+
+.comment-item {
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.no-comments {
+    font-style: italic;
+}
+
+/* soft fix to make "add comment" button match other buttons */
+.form-actions button.btn.btn-primary {
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    background: var(--nav-bg);
+    color: var(--main-ink);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+

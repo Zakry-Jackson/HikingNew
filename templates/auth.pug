@@ -1,0 +1,61 @@
+extends page_layout 
+
+block content 
+    .card
+        h1 Account Management
+
+        if error 
+            p.error(style="color: red;")= error
+
+        if !action
+            .auth-choice
+                button.btn.btn-primary#show-create Create Account
+                button.btn.btn-primary#show-login Login
+
+        #create-form.auth-form(style=action === 'create' || !action ? 'display: none;' : 'display: block;')
+            h2 Create Account
+            form(method="POST", action="/auth/create")
+                .field
+                    label(for="username") Username (max 8 characters)
+                    input#username(type="text", name="username", maxlength="8", required)
+                .field
+                    label(for="password") Password (min 8 characters, must contain a letter, number, and one of: $!&)
+                    input#password(type="password", name="password", required)
+                button.btn.btn-primary(type="submit") Create Account
+
+        #login-form.auth-form(style=action === 'login' || !action ? 'display: none;' : 'display: block;')
+            h2 Login
+            form(method="POST", action="/auth/login")
+                .field
+                    label(for="username-login") Username
+                    input#username-login(type="text", name="username", required)
+                .field
+                    label(for="password-login") Password
+                    input#password-login(type="password", name="password", required)
+                button.btn.btn-primary(type="submit") Login
+
+block append scripts
+    script.
+        document.addEventListener('DOMContentLoaded', () => {
+            const showCreate = document.getElementById('show-create');
+            const showLogin = document.getElementById('show-login');
+            const createForm = document.getElementById('create-form');
+            const loginForm = document.getElementById('login-form');
+            const authChoice = document.querySelector('.auth-choice');
+
+            if (showCreate) {
+                showCreate.addEventListener('click', () => {
+                    authChoice.style.display = 'none';
+                    createForm.style.display = 'block';
+                    loginForm.style.display = 'none';
+                });
+            }
+
+            if (showLogin) {
+                showLogin.addEventListener('click', () => {
+                    authChoice.style.display = 'none';
+                    createForm.style.display = 'none';
+                    loginForm.style.display = 'block';
+                });
+            }
+        });

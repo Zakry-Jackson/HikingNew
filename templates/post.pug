@@ -1,0 +1,50 @@
+extends page_layout 
+
+block content 
+    .card
+        h2= post.title 
+        p.post-body= post.blogtext
+        p.post-date
+            = post.author + '-' + post.publish_date.toString().slice(0, 21)
+        
+
+    if user
+        .post-actions 
+            if user.username === post.author
+                a.btn.btn-primary(href=`/admin/edit/${post.id}`) Edit 
+            if user.username === post.author || user.is_moderator
+                form(method="POST", action=`/admin/delete/${post.id}`, style="display:inline")
+                    button.btn.btn-delete(type="submit") Delete
+
+    .card 
+        h2 Comments 
+
+        if !comments || comments.length === 0
+            p.no-comments No comments yet. Be the first! 
+
+        ul.comment-list 
+            if comments 
+                each comment in comments 
+                    li.comment-item 
+                        p 
+                            strong= comment.author
+                            | -
+                            span= comment.created_at.toString().slice(0, 21)
+                        p= comment.content 
+                        if user && (user.username === comment.author || user.is_moderator)
+                            form(method="POST", action=`/admin/comments/${comment.id}/delete`)
+                                input(type="hidden", name="postId", value=post.id)
+                                button.btn.btn-delete(type="submit") Delete
+
+        if user
+            form#comment-form.post-form(data-post-id=post.id)
+                .field 
+                    label(for="comment-content") Comment 
+                    textarea#comment-content.comment-textarea(name="content", required)
+                .form-actions 
+                    button.btn.btn-primary(type="submit") Add Comment
+        else
+            p.no-auth Login to add a comment 
+
+block append scripts 
+    script(src="/static/js/comments.js")

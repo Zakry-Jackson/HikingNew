@@ -1,0 +1,20 @@
+doctype html 
+html 
+    head
+        meta(charset="UTF-8")
+        title Love for Trails 
+        link(rel="stylesheet", href="/static/css/main.css")
+    
+    body 
+        header.site-header 
+            h1 Love for Trails 
+
+        .layout
+            .sidebar
+                include nav 
+            
+            .content
+                block content
+
+        footer.site-footer
+        block scripts

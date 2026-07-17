@@ -1,0 +1,26 @@
+extends page_layout 
+
+block content 
+    .card
+        h1 All Posts 
+
+        if !posts || posts.length === 0
+            p There aren't any posts yet! :(
+        else 
+            ul.post-list 
+                each post in posts 
+                    li.post-preview 
+                        h3 
+                            a(href=`/post/${post.id}`)= post.title 
+                        p.post-snip= post.blogtext.length > 200 ? post.blogtext.slice(0, 200) + "....." : post.blogtext
+                        p.post-date
+                            = post.author + '-' + post.publish_date.toString().slice(0, 21)
+                        
+
+                        if user
+                            .post-actions 
+                                if user.username === post.author
+                                    a.btn.btn-primary(href=`/admin/edit/${post.id}`) Edit 
+                                if user.username === post.author || user.is_moderator
+                                    form(method="POST", action=`/admin/delete/${post.id}`, style="display:inline")
+                                        button.btn.btn-delete(type="submit") Delete

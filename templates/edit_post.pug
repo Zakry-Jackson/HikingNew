@@ -1,0 +1,16 @@
+extends page_layout 
+
+block content 
+    .card
+        h1 Edit Post 
+
+        form(method="POST", action=`/admin/edit/${post.id}`)
+            .field 
+                label(for="title") Title 
+                input(type="text", name="title", required, value=post.title)
+
+            .field 
+                label(for="blogtext") Post text
+                textarea#blogtext(name="blogtext", rows="10", required)= post.blogtext 
+            
+            button.btn.btn-primary(type="submit") Save Changes

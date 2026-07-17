@@ -1,0 +1,16 @@
+extends page_layout 
+
+block content 
+    .card
+        h1 Create a New Post 
+
+        form(method="POST", action="/admin/new")
+            .field 
+                label(for="title") Title 
+                input#title(type="text", name="title", required)
+
+            .field 
+                label(for="blogtext") Post text 
+                textarea#blogtext(name="blogtext", rows="10", required)
+
+            button.btn.btn-primary(type="submit") Create Post
